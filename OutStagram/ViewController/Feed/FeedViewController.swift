@@ -9,6 +9,9 @@ import SnapKit
 import UIKit
 
 class FeedViewController: UIViewController {
+    
+    let imagePickerController = UIImagePickerController()
+    
     let tableView = UITableView(frame: .zero)
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -16,39 +19,12 @@ class FeedViewController: UIViewController {
         // Do any additional setup after loading the view.
         setupNavigationBar()
         setupTableView()
+        setupImagePickerView()
+        
     }
-
-}
-
-//MARK: - Private Function
-private extension FeedViewController {
     
-    func setupNavigationBar(){
-        navigationItem.title = "OutStagram"
-        
-        let uploadButton = UIBarButtonItem(image: UIImage(systemName: "plus.app"),
-                                           style: .plain,
-                                           target: self,
-                                           action: nil)
-
-        navigationItem.rightBarButtonItem = uploadButton
-    }
-
-    func setupTableView(){
-        view.addSubview(tableView)
-        tableView.backgroundColor = .systemBackground
-        tableView.separatorStyle = .none
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: "FeedTableViewCell")
-        tableView.snp.makeConstraints{
-            $0.edges.equalToSuperview()
-        }
-        
-        
-    }
 }
+
 
 extension FeedViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,4 +44,63 @@ extension FeedViewController: UITableViewDataSource {
 }
 extension FeedViewController: UITableViewDelegate {
     
+}
+
+extension FeedViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var selectImage:UIImage?
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            selectImage = editedImage
+        }else if let originImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            selectImage = originImage
+        }
+        print(selectImage)
+        
+        picker.dismiss(animated: true) { [weak self] in
+            guard let self = self else { return }
+            let uploadViewController = UploadViewController(uploadImage: selectImage ?? UIImage())
+            let navigationViewController = UINavigationController(rootViewController: uploadViewController)
+            navigationViewController.modalPresentationStyle = .fullScreen
+            
+            self.present(navigationViewController, animated: true , completion: nil)
+        }
+    }
+}
+
+//MARK: - Private Function
+private extension FeedViewController {
+    
+    func setupNavigationBar(){
+        navigationItem.title = "OutStagram"
+        
+        let uploadButton = UIBarButtonItem(image: UIImage(systemName: "plus.app"),
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(didTappedUploadButton))
+        
+        navigationItem.rightBarButtonItem = uploadButton
+    }
+    
+    func setupTableView(){
+        view.addSubview(tableView)
+        tableView.backgroundColor = .systemBackground
+        tableView.separatorStyle = .none
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(FeedTableViewCell.self, forCellReuseIdentifier: "FeedTableViewCell")
+        tableView.snp.makeConstraints{
+            $0.edges.equalToSuperview()
+        }
+    }
+    
+    func setupImagePickerView(){
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.delegate = self
+    }
+    
+    @objc func didTappedUploadButton(){
+        present(imagePickerController, animated: true, completion: nil)
+    }
 }

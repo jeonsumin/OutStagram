@@ -19,6 +19,7 @@
 		DE42ED5F27A81ED500CF36A5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED5E27A81ED500CF36A5 /* ProfileViewController.swift */; };
 		DE42ED6127A8241A00CF36A5 /* ProfileDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED6027A8241A00CF36A5 /* ProfileDataView.swift */; };
 		DE42ED6427A8299F00CF36A5 /* ProfileCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED6327A8299F00CF36A5 /* ProfileCollectionVIewCell.swift */; };
+		DE42ED6627A8315000CF36A5 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED6527A8315000CF36A5 /* UploadViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		DE42ED5E27A81ED500CF36A5 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DE42ED6027A8241A00CF36A5 /* ProfileDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataView.swift; sourceTree = "<group>"; };
 		DE42ED6327A8299F00CF36A5 /* ProfileCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionVIewCell.swift; sourceTree = "<group>"; };
+		DE42ED6527A8315000CF36A5 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				DE42ED5B27A81E8100CF36A5 /* Cell */,
 				DE42ED3E27A8112400CF36A5 /* FeedViewController.swift */,
+				DE42ED6527A8315000CF36A5 /* UploadViewController.swift */,
 			);
 			path = Feed;
 			sourceTree = "<group>";
@@ -109,9 +112,9 @@
 		DE42ED5A27A81E7800CF36A5 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				DE42ED6727A8323700CF36A5 /* View */,
+				DE42ED6227A8299300CF36A5 /* Cell */,
 				DE42ED5E27A81ED500CF36A5 /* ProfileViewController.swift */,
-				DE42ED6227A8299300CF36A5 /* cell */,
-				DE42ED6027A8241A00CF36A5 /* ProfileDataView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -124,12 +127,20 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		DE42ED6227A8299300CF36A5 /* cell */ = {
+		DE42ED6227A8299300CF36A5 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				DE42ED6327A8299F00CF36A5 /* ProfileCollectionVIewCell.swift */,
 			);
-			path = cell;
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DE42ED6727A8323700CF36A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DE42ED6027A8241A00CF36A5 /* ProfileDataView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE42ED3F27A8112400CF36A5 /* FeedViewController.swift in Sources */,
+				DE42ED6627A8315000CF36A5 /* UploadViewController.swift in Sources */,
 				DE42ED6427A8299F00CF36A5 /* ProfileCollectionVIewCell.swift in Sources */,
 				DE42ED5227A811F000CF36A5 /* TabBarController.swift in Sources */,
 				DE42ED3B27A8112400CF36A5 /* AppDelegate.swift in Sources */,
