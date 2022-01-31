@@ -3,27 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		DE42ED3B27A8112400CF36A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED3A27A8112400CF36A5 /* AppDelegate.swift */; };
 		DE42ED3D27A8112400CF36A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED3C27A8112400CF36A5 /* SceneDelegate.swift */; };
-		DE42ED3F27A8112400CF36A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED3E27A8112400CF36A5 /* ViewController.swift */; };
-		DE42ED4227A8112400CF36A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE42ED4027A8112400CF36A5 /* Main.storyboard */; };
+		DE42ED3F27A8112400CF36A5 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED3E27A8112400CF36A5 /* FeedViewController.swift */; };
 		DE42ED4427A8113000CF36A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE42ED4327A8113000CF36A5 /* Assets.xcassets */; };
 		DE42ED4727A8113000CF36A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE42ED4527A8113000CF36A5 /* LaunchScreen.storyboard */; };
+		DE42ED5027A8115B00CF36A5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DE42ED4F27A8115B00CF36A5 /* SnapKit */; };
+		DE42ED5227A811F000CF36A5 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED5127A811F000CF36A5 /* TabBarController.swift */; };
+		DE42ED5527A816B500CF36A5 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED5427A816B500CF36A5 /* FeedTableViewCell.swift */; };
+		DE42ED5827A81D9800CF36A5 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED5727A81D9800CF36A5 /* UIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DE42ED3727A8112400CF36A5 /* OutStagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutStagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE42ED3A27A8112400CF36A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE42ED3C27A8112400CF36A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DE42ED3E27A8112400CF36A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DE42ED4127A8112400CF36A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DE42ED3E27A8112400CF36A5 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		DE42ED4327A8113000CF36A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DE42ED4627A8113000CF36A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE42ED4827A8113000CF36A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE42ED5127A811F000CF36A5 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		DE42ED5427A816B500CF36A5 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		DE42ED5727A81D9800CF36A5 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE42ED5027A8115B00CF36A5 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +62,33 @@
 		DE42ED3927A8112400CF36A5 /* OutStagram */ = {
 			isa = PBXGroup;
 			children = (
+				DE42ED5627A81D8200CF36A5 /* Extension */,
 				DE42ED3A27A8112400CF36A5 /* AppDelegate.swift */,
 				DE42ED3C27A8112400CF36A5 /* SceneDelegate.swift */,
-				DE42ED3E27A8112400CF36A5 /* ViewController.swift */,
-				DE42ED4027A8112400CF36A5 /* Main.storyboard */,
+				DE42ED5327A811FA00CF36A5 /* ViewController */,
 				DE42ED4327A8113000CF36A5 /* Assets.xcassets */,
 				DE42ED4527A8113000CF36A5 /* LaunchScreen.storyboard */,
 				DE42ED4827A8113000CF36A5 /* Info.plist */,
 			);
 			path = OutStagram;
+			sourceTree = "<group>";
+		};
+		DE42ED5327A811FA00CF36A5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DE42ED3E27A8112400CF36A5 /* FeedViewController.swift */,
+				DE42ED5127A811F000CF36A5 /* TabBarController.swift */,
+				DE42ED5427A816B500CF36A5 /* FeedTableViewCell.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DE42ED5627A81D8200CF36A5 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				DE42ED5727A81D9800CF36A5 /* UIButton.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +107,9 @@
 			dependencies = (
 			);
 			name = OutStagram;
+			packageProductDependencies = (
+				DE42ED4F27A8115B00CF36A5 /* SnapKit */,
+			);
 			productName = OutStagram;
 			productReference = DE42ED3727A8112400CF36A5 /* OutStagram.app */;
 			productType = "com.apple.product-type.application";
@@ -110,6 +137,9 @@
 				Base,
 			);
 			mainGroup = DE42ED2E27A8112300CF36A5;
+			packageReferences = (
+				DE42ED4E27A8115B00CF36A5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = DE42ED3827A8112400CF36A5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -126,7 +156,6 @@
 			files = (
 				DE42ED4727A8113000CF36A5 /* LaunchScreen.storyboard in Resources */,
 				DE42ED4427A8113000CF36A5 /* Assets.xcassets in Resources */,
-				DE42ED4227A8112400CF36A5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +166,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE42ED3F27A8112400CF36A5 /* ViewController.swift in Sources */,
+				DE42ED3F27A8112400CF36A5 /* FeedViewController.swift in Sources */,
+				DE42ED5227A811F000CF36A5 /* TabBarController.swift in Sources */,
 				DE42ED3B27A8112400CF36A5 /* AppDelegate.swift in Sources */,
+				DE42ED5827A81D9800CF36A5 /* UIButton.swift in Sources */,
 				DE42ED3D27A8112400CF36A5 /* SceneDelegate.swift in Sources */,
+				DE42ED5527A816B500CF36A5 /* FeedTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DE42ED4027A8112400CF36A5 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DE42ED4127A8112400CF36A5 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DE42ED4527A8113000CF36A5 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -341,6 +365,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DE42ED4E27A8115B00CF36A5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DE42ED4F27A8115B00CF36A5 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE42ED4E27A8115B00CF36A5 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DE42ED2F27A8112300CF36A5 /* Project object */;
 }
