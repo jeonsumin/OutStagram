@@ -68,7 +68,7 @@ class ProfileViewController: UIViewController {
         layout.minimumInteritemSpacing = 0.5
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .systemBackground
-        collectionView.register(ProfileCollectionViewCell.self, forCellWithReuseIdentifier: "ProfileCollectionViewCell")
+        collectionView.register(ProfileCollectionVIewCell.self, forCellWithReuseIdentifier: "ProfileCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -90,7 +90,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCollectionViewCell", for: indexPath) as? ProfileCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCollectionViewCell", for: indexPath) as? ProfileCollectionVIewCell
         cell?.setupUI(with: UIImage())
         return cell ?? UICollectionViewCell()
     }
