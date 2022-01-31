@@ -112,8 +112,25 @@ private extension ProfileViewController {
         let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
                                              style: .plain,
                                              target: self,
-                                             action: nil)
+                                             action: #selector(didTappedRightBarButtonItem))
         navigationItem.rightBarButtonItem = rightBarButton
+    }
+    @objc func didTappedRightBarButtonItem(){
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        [
+        UIAlertAction(title: "회원 정보 변경", style: .default) { _ in
+            print("회원 정보 변경")
+        },
+        UIAlertAction(title: "탈퇴 하기", style: .destructive) { _ in
+            print("탈퇴 하기")
+        },
+        
+        UIAlertAction(title: "닫기", style: .cancel)
+        ].forEach {
+            alert.addAction($0)
+        }
+        present(alert, animated: true, completion: nil)
+        
     }
     
     func setupUI(){
