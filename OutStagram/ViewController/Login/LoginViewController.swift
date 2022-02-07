@@ -11,6 +11,9 @@ import SnapKit
 class LoginViewController: UIViewController {
 
     //MARK: - Properties
+    
+    private let stackView = UIStackView()
+    
     private lazy var backgroundImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -104,13 +107,26 @@ private extension LoginViewController {
     
     func setupUI(){
         [backgroundImage,
-         idTextField,
-         pwTextField,
-         loginButton,
+         stackView,
          registerButton,
          logoImage].forEach{
             view.addSubview($0)
         }
+        
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 10
+        
+        [idTextField,
+         pwTextField,
+         loginButton
+        ].forEach{
+            stackView.addArrangedSubview($0)
+            $0.snp.makeConstraints{
+                $0.height.equalTo(50)
+            }
+        }
+        
         backgroundImage.snp.makeConstraints{
             $0.leading.top.trailing.bottom.equalToSuperview()
         }
@@ -121,25 +137,9 @@ private extension LoginViewController {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(100)
         }
-        
-        idTextField.snp.makeConstraints{
+        stackView.snp.makeConstraints{
             $0.top.equalTo(logoImage.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(25)
-            $0.height.equalTo(50)
-        }
-        pwTextField.snp.makeConstraints{
-            $0.top.equalTo(idTextField.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(25)
-            $0.height.equalTo(50)
-        }
-    
-        loginButton.snp.makeConstraints{
-            $0.top.equalTo(pwTextField.snp.bottom).offset(10)
-            $0.leading.trailing.equalToSuperview().inset(25)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(50)
         }
         
         registerButton.snp.makeConstraints{
@@ -151,7 +151,7 @@ private extension LoginViewController {
     }
     @objc func loginButtonTapped(){
         print("loginButton Tapped ")
-//        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     @objc func registerButtonTapped(){
         print("registerButtonTapped ")
