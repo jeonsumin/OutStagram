@@ -9,6 +9,8 @@ import SnapKit
 import UIKit
 
 class FeedTableViewCell : UITableViewCell {
+    
+    //MARK: - Properties
     private lazy var postImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .tertiaryLabel
@@ -75,9 +77,7 @@ class FeedTableViewCell : UITableViewCell {
         return label
     }()
     
-    
-    
-    
+    //MARK: - setupUI
     func setupUI(){
         [
             postImageView,

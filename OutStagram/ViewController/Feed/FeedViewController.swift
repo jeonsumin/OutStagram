@@ -43,7 +43,14 @@ extension FeedViewController: UITableViewDataSource {
     
 }
 extension FeedViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let loginVC = LoginViewController()
+        let navigationVC = UINavigationController(rootViewController: loginVC)
+        navigationVC.modalPresentationStyle = .fullScreen
+        navigationVC.isNavigationBarHidden = true
+        self.present(navigationVC, animated: true , completion: nil)
+    }
 }
 
 extension FeedViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -54,7 +61,6 @@ extension FeedViewController: UIImagePickerControllerDelegate, UINavigationContr
         }else if let originImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectImage = originImage
         }
-        print(selectImage)
         
         picker.dismiss(animated: true) { [weak self] in
             guard let self = self else { return }

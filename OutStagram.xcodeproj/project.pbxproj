@@ -20,6 +20,9 @@
 		DE42ED6127A8241A00CF36A5 /* ProfileDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED6027A8241A00CF36A5 /* ProfileDataView.swift */; };
 		DE42ED6427A8299F00CF36A5 /* ProfileCollectionVIewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED6327A8299F00CF36A5 /* ProfileCollectionVIewCell.swift */; };
 		DE42ED6627A8315000CF36A5 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED6527A8315000CF36A5 /* UploadViewController.swift */; };
+		DEF38E4027B146F2004FBDF5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF38E3F27B146F2004FBDF5 /* LoginViewController.swift */; };
+		DEF38E4227B14F3D004FBDF5 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF38E4127B14F3D004FBDF5 /* UITextField.swift */; };
+		DEF38E4427B1532D004FBDF5 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF38E4327B1532D004FBDF5 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,9 @@
 		DE42ED6027A8241A00CF36A5 /* ProfileDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataView.swift; sourceTree = "<group>"; };
 		DE42ED6327A8299F00CF36A5 /* ProfileCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionVIewCell.swift; sourceTree = "<group>"; };
 		DE42ED6527A8315000CF36A5 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		DEF38E3F27B146F2004FBDF5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DEF38E4127B14F3D004FBDF5 /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		DEF38E4327B1532D004FBDF5 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +90,7 @@
 		DE42ED5327A811FA00CF36A5 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DEF38E3E27B146E5004FBDF5 /* Login */,
 				DE42ED5A27A81E7800CF36A5 /* Profile */,
 				DE42ED5927A81E7200CF36A5 /* Feed */,
 				DE42ED5127A811F000CF36A5 /* TabBarController.swift */,
@@ -95,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				DE42ED5727A81D9800CF36A5 /* UIButton.swift */,
+				DEF38E4127B14F3D004FBDF5 /* UITextField.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -141,6 +149,15 @@
 				DE42ED6027A8241A00CF36A5 /* ProfileDataView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DEF38E3E27B146E5004FBDF5 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				DEF38E3F27B146F2004FBDF5 /* LoginViewController.swift */,
+				DEF38E4327B1532D004FBDF5 /* RegisterViewController.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +245,9 @@
 				DE42ED3D27A8112400CF36A5 /* SceneDelegate.swift in Sources */,
 				DE42ED6127A8241A00CF36A5 /* ProfileDataView.swift in Sources */,
 				DE42ED5527A816B500CF36A5 /* FeedTableViewCell.swift in Sources */,
+				DEF38E4427B1532D004FBDF5 /* RegisterViewController.swift in Sources */,
+				DEF38E4027B146F2004FBDF5 /* LoginViewController.swift in Sources */,
+				DEF38E4227B14F3D004FBDF5 /* UITextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
