@@ -30,24 +30,25 @@ class LoginViewController: UIViewController {
     }()
     
     private lazy var idTextField: UITextField = {
-        let tf = UITextField()
+        let textField = UITextField()
 //        tf.placeholder = "사용자 이름"
-        tf.attributedPlaceholder = NSAttributedString(string: "사용자 이름", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        tf.layer.cornerRadius = 5
-        tf.backgroundColor = .init(white: 1, alpha: 0.3)
-        tf.textColor = .label
-        tf.addLeftPadding()
+        textField.attributedPlaceholder = NSAttributedString(string: "사용자 이름", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        textField.layer.cornerRadius = 5
+        textField.backgroundColor = .init(white: 1, alpha: 0.3)
+        textField.textColor = .label
+        textField.addLeftPadding()
         
-        return tf
+        return textField
     }()
     private lazy var pwTextField: UITextField = {
-        let tf = UITextField()
-        tf.attributedPlaceholder = NSAttributedString(string: "비밀번호", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        tf.layer.cornerRadius = 5
-        tf.backgroundColor = .init(white: 1, alpha: 0.3)
-        tf.addLeftPadding()
+        let textField = UITextField()
+        textField.attributedPlaceholder = NSAttributedString(string: "비밀번호", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        textField.layer.cornerRadius = 5
+        textField.backgroundColor = .init(white: 1, alpha: 0.3)
+        textField.isSecureTextEntry = true
+        textField.addLeftPadding()
         
-        return tf
+        return textField
     }()
     
     private lazy var loginButton: UIButton = {

@@ -59,6 +59,7 @@ class RegisterViewController: UIViewController {
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.textColor = .label
+        textField.isSecureTextEntry = true
         textField.addLeftPadding()
         return textField
     }()
