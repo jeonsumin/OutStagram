@@ -10,6 +10,7 @@ import SnapKit
 
 class RegisterViewController: UIViewController {
     
+    private let stackView = UIStackView()
     //MARK: - Properties
     private lazy var logoImage :UIImageView = {
         let image = UIImageView()
@@ -117,60 +118,40 @@ private extension RegisterViewController {
     //MARK: - setupUI
     func setupUI(){
         view.backgroundColor = .systemBackground
+        
         [logoImage,
+         stackView,
+         loginLabel
+        ].forEach{view.addSubview($0)}
+        
+        stackView.distribution = .equalSpacing
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        
+        [
          idTextField,
          nameTextField,
          nickNameTextField,
          pwTextField,
          registerButton,
-         termLabel,
-         loginLabel
+         termLabel
         ].forEach{
-            view.addSubview($0)
+            stackView.addArrangedSubview($0)
+            $0.snp.makeConstraints{
+                $0.height.equalTo(40)
+            }
         }
         
         logoImage.snp.makeConstraints{
             $0.top.equalToSuperview().offset(100)
-            $0.centerX.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(45)
-        }
-        idTextField.snp.makeConstraints{
-            $0.top.equalTo(logoImage.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(25)
-            $0.height.equalTo(40)
-        }
-        nameTextField.snp.makeConstraints{
-            $0.top.equalTo(idTextField.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(25)
-            $0.height.equalTo(40)
-        }
-        nickNameTextField.snp.makeConstraints{
-            $0.top.equalTo(nameTextField.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(25)
-            $0.height.equalTo(40)
-        }
-        pwTextField.snp.makeConstraints{
-            $0.top.equalTo(nickNameTextField.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(25)
-            $0.height.equalTo(40)
-        }
-        registerButton.snp.makeConstraints{
-            $0.top.equalTo(pwTextField.snp.bottom).offset(15)
-            $0.centerX.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(25)
         }
-        termLabel.snp.makeConstraints{
-            $0.top.equalTo(registerButton.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(40)
+        stackView.snp.makeConstraints{
+            $0.top.equalTo(logoImage.snp.bottom).offset(50)
+            $0.leading.trailing.equalToSuperview().inset(25)
         }
+        
         loginLabel.snp.makeConstraints{
-//            $0.top.equalTo(termLabel.snp.bottom).offset(40)
-//            $0.centerX.equalToSuperview()
             $0.leading.trailing.bottom.equalToSuperview().inset(10)
             $0.height.equalTo(50)
         }
