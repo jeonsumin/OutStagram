@@ -146,7 +146,8 @@ class FeedTableViewCell : UITableViewCell {
         
         
         postImageView.snp.makeConstraints{
-            $0.leading.trailing.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(userImage.snp.bottom).offset(10)
             $0.height.equalTo(postImageView.snp.width)
         }
         
