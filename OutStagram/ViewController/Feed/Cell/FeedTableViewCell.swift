@@ -15,16 +15,15 @@ class FeedTableViewCell : UITableViewCell {
         let imageView = UIImageView()
         imageView.backgroundColor = .lightGray
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 10
+        imageView.layer.cornerRadius = 20
         return imageView
     }()
     
     private lazy var userNameLabel: UILabel = {
        let label = UILabel()
-        
         label.text = "홍길동"
         label.textColor = .label
-        label.font = .systemFont(ofSize: 12,
+        label.font = .systemFont(ofSize: 14,
                                  weight: .bold)
         
         return label
@@ -32,10 +31,9 @@ class FeedTableViewCell : UITableViewCell {
     
     private lazy var infoLabel: UILabel = {
        let label = UILabel()
-        
         label.text = "소개~ 소개~"
         label.textColor = .label
-        label.font = .systemFont(ofSize: 10,
+        label.font = .systemFont(ofSize: 12,
                                  weight: .semibold)
         
         return label
@@ -132,16 +130,16 @@ class FeedTableViewCell : UITableViewCell {
         userImage.snp.makeConstraints{
             $0.leading.equalToSuperview().offset(buttonInset)
             $0.top.equalToSuperview().offset(8)
-            $0.width.height.equalTo(buttonInset)
+            $0.width.height.equalTo(40)
         }
         userNameLabel.snp.makeConstraints{
             $0.leading.equalTo(userImage.snp.trailing).offset(8)
-            $0.top.equalTo(userImage.snp.top)
+            $0.top.equalTo(userImage.snp.top).offset(5)
         }
         
         infoLabel.snp.makeConstraints{
-            $0.leading.equalTo(userNameLabel.snp.trailing).offset(8)
-            $0.top.equalTo(userImage.snp.top)
+            $0.leading.equalTo(userImage.snp.trailing).offset(8)
+            $0.top.equalTo(userNameLabel.snp.bottom).offset(2)
         }
         
         
