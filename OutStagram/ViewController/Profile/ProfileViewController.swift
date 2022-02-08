@@ -136,9 +136,8 @@ private extension ProfileViewController {
             navigationItem.rightBarButtonItem = rightBarButton
         } else {
             navigationItem.title = "등록"
-            self.navigationController?.navigationBar.topItem?.title = ""
+            
 
-            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             
             let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
                                                  style: .plain,

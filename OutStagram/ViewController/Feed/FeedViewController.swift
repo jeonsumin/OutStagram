@@ -51,6 +51,9 @@ extension FeedViewController: UITableViewDelegate {
         
         let loginVC = ProfileViewController()
         loginVC.isYn = false
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+
         self.navigationController?.pushViewController(loginVC, animated: true )
      
     }
