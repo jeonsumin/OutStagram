@@ -44,11 +44,15 @@ extension FeedViewController: UITableViewDataSource {
 }
 extension FeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let loginVC = LoginViewController()
+//        let navigationVC = UINavigationController(rootViewController: loginVC)
+//        navigationVC.modalPresentationStyle = .fullScreen
+//        self.present(navigationVC, animated: true)
         
         let loginVC = ProfileViewController()
         loginVC.isYn = false
-//        let navigationVC = UINavigationController(rootViewController: loginVC)
         self.navigationController?.pushViewController(loginVC, animated: true )
+     
     }
 }
 

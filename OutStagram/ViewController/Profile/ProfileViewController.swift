@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    //MARK: - Properties
     var isYn = true
     private lazy var profileImageView : UIImageView = {
         let img = UIImageView()
@@ -91,6 +92,7 @@ class ProfileViewController: UIViewController {
         return collectionView
     }()
     
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -99,6 +101,7 @@ class ProfileViewController: UIViewController {
     }
 }
 
+//MARK: - UICollectionViewDataSource
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
@@ -112,7 +115,7 @@ extension ProfileViewController: UICollectionViewDataSource {
     
     
 }
-
+//MARK: - UICollectionViewDelegateFlowLayout
 extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width :CGFloat = (collectionView.frame.width / 3) - 1
@@ -120,11 +123,11 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
+//MARK: - Private Function
 private extension ProfileViewController {
+    //MARK: - 네비게이션 아이템 세팅
     func setupNavigationItems(){
         if isYn {
-            print("1")
             navigationItem.title = "전수민"
             let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
                                                  style: .plain,
@@ -132,19 +135,20 @@ private extension ProfileViewController {
                                                  action: #selector(didTappedRightBarButtonItem))
             navigationItem.rightBarButtonItem = rightBarButton
         } else {
-            print("2")
             navigationItem.title = "등록"
-            navigationController?.isNavigationBarHidden = true
-            navigationController?.navigationBar.backItem?.title = ""
+            self.navigationController?.navigationBar.topItem?.title = ""
+
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
             
-//            let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
-//                                                 style: .plain,
-//                                                 target: self,
-//                                                 action: #selector(didTappedRightBarButtonItem))
-//            navigationItem.rightBarButtonItem = rightBarButton
+            let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(didTappedRightBarButtonItem))
+            navigationItem.rightBarButtonItem = rightBarButton
         }
     }
     
+    //MARK: - UI 세팅
     func setupUI(){
         let buttonStackView = UIStackView(arrangedSubviews: [followButton,messageButton])
         buttonStackView.spacing = 4
@@ -214,7 +218,7 @@ private extension ProfileViewController {
             
         }
     }
-    
+    //MARK: - Button Event
     @objc func didTappedRightBarButtonItem(){
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         [
