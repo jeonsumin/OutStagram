@@ -9,6 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    var isYn = true
     private lazy var profileImageView : UIImageView = {
         let img = UIImageView()
         img.layer.cornerRadius = 40
@@ -57,6 +58,19 @@ class ProfileViewController: UIViewController {
         return btn
     }()
     
+    private lazy var editProfileButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setTitle("프로필 수정", for: .normal)
+        btn.setTitleColor(.label, for: .normal)
+        btn.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+        btn.backgroundColor = .white
+        btn.layer.cornerRadius = 3
+        btn.layer.borderWidth = 0.5
+        btn.layer.borderColor = UIColor.tertiaryLabel.cgColor
+        
+        return btn
+    }()
+    
     private let photoDataView = ProfileDataView(title: "게시글", count: 123)
     private let followerDataView = ProfileDataView(title: "팔로워", count: 1223)
     private let FollowingDataView = ProfileDataView(title: "팔로잉", count: 12)
@@ -79,6 +93,7 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         setupNavigationItems()
         setupUI()
     }
@@ -108,29 +123,26 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 
 private extension ProfileViewController {
     func setupNavigationItems(){
-        navigationItem.title = "전수민"
-        let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
-                                             style: .plain,
-                                             target: self,
-                                             action: #selector(didTappedRightBarButtonItem))
-        navigationItem.rightBarButtonItem = rightBarButton
-    }
-    @objc func didTappedRightBarButtonItem(){
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        [
-        UIAlertAction(title: "회원 정보 변경", style: .default) { _ in
-            print("회원 정보 변경")
-        },
-        UIAlertAction(title: "탈퇴 하기", style: .destructive) { _ in
-            print("탈퇴 하기")
-        },
-        
-        UIAlertAction(title: "닫기", style: .cancel)
-        ].forEach {
-            alert.addAction($0)
+        if isYn {
+            print("1")
+            navigationItem.title = "전수민"
+            let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
+                                                 style: .plain,
+                                                 target: self,
+                                                 action: #selector(didTappedRightBarButtonItem))
+            navigationItem.rightBarButtonItem = rightBarButton
+        } else {
+            print("2")
+            navigationItem.title = "등록"
+            navigationController?.isNavigationBarHidden = true
+            navigationController?.navigationBar.backItem?.title = ""
+            
+//            let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
+//                                                 style: .plain,
+//                                                 target: self,
+//                                                 action: #selector(didTappedRightBarButtonItem))
+//            navigationItem.rightBarButtonItem = rightBarButton
         }
-        present(alert, animated: true, completion: nil)
-        
     }
     
     func setupUI(){
@@ -148,6 +160,7 @@ private extension ProfileViewController {
             descriptionLabel,
             buttonStackView,
             dataStackView,
+            editProfileButton,
             collectionView
         ].forEach{ view.addSubview($0) }
         let inset: CGFloat = 16.0
@@ -175,16 +188,61 @@ private extension ProfileViewController {
             $0.leading.equalTo(nameLabel.snp.leading)
             $0.trailing.equalTo(nameLabel.snp.trailing)
         }
+        if isYn{
+            buttonStackView.isHidden = true
+            editProfileButton.isHidden = false
+        }else{
+            buttonStackView.isHidden = false
+            editProfileButton.isHidden = true
+        }
         
         buttonStackView.snp.makeConstraints{
             $0.top.equalTo(descriptionLabel.snp.bottom).offset(12)
             $0.leading.equalTo(nameLabel.snp.leading)
             $0.trailing.equalTo(nameLabel.snp.trailing)
         }
+        
+        editProfileButton.snp.makeConstraints{
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(12)
+            $0.leading.equalTo(nameLabel.snp.leading)
+            $0.trailing.equalTo(nameLabel.snp.trailing)
+        }
+        
         collectionView.snp.makeConstraints{
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(buttonStackView.snp.bottom).offset(16)
             
         }
     }
+    
+    @objc func didTappedRightBarButtonItem(){
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        [
+        UIAlertAction(title: "설정", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            let editProfileVC = EditProfileViewController()
+            let navigationVC = UINavigationController(rootViewController: editProfileVC)
+//            navigationVC.modalTransitionStyle = .partialCurl
+            navigationVC.modalPresentationStyle = .overFullScreen
+            self.present(navigationVC, animated: true)
+            
+            
+        },
+        UIAlertAction(title: "탈퇴 하기", style: .destructive) {[weak self] _ in
+            guard let self = self else { return }
+            let loginVC = LoginViewController()
+            let navigationVC = UINavigationController(rootViewController: loginVC)
+            navigationVC.modalPresentationStyle = .fullScreen
+            navigationVC.modalTransitionStyle = .flipHorizontal
+            self.present(navigationVC, animated: true, completion: nil)
+        },
+        
+        UIAlertAction(title: "닫기", style: .cancel)
+        ].forEach {
+            alert.addAction($0)
+        }
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
 }
