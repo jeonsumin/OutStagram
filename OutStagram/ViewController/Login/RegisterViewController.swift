@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+import Firebase
 
 class RegisterViewController: UIViewController {
+
+    private let FBAuth = Auth.auth()
     
     private let stackView = UIStackView()
     //MARK: - Properties
@@ -41,7 +44,7 @@ class RegisterViewController: UIViewController {
         return textField
     }()
     
-    private lazy var nickNameTextField: UITextField = {
+    private lazy var userNameTextField: UITextField = {
         let textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(string: "사용자 이름", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         textField.layer.cornerRadius = 5
@@ -132,7 +135,7 @@ private extension RegisterViewController {
         [
          idTextField,
          nameTextField,
-         nickNameTextField,
+         userNameTextField,
          pwTextField,
          registerButton,
          termLabel
@@ -158,6 +161,12 @@ private extension RegisterViewController {
         }
     }
     
+    func EmailAndPasswordValidate(message: String = "이메일 또는 비밀번호를 확인해주세요" ){
+        let alert = UIAlertController(title: "알림", message: message , preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
     
     //MARK: - Button Event
     @objc func loginLabelTapped(){
@@ -166,7 +175,47 @@ private extension RegisterViewController {
     }
     
     @objc func registerButtonTapped(){
-        print("registerButtonTapped")
-        self.dismiss(animated: true , completion: nil)
+        idTextField.resignFirstResponder()
+        nameTextField.resignFirstResponder()
+        userNameTextField.resignFirstResponder()
+        pwTextField.resignFirstResponder()
+        guard let email = idTextField.text,
+              let name = nameTextField.text,
+              let userName = userNameTextField.text,
+              let password = pwTextField.text,
+              !email.isEmpty,
+              !name.isEmpty,
+              !password.isEmpty,
+              password.count > 6
+        else {
+            EmailAndPasswordValidate()
+            return
+        }
+        
+        DatabaseManager.shared.selectUser(with: email) {[weak self] snapshot in
+            guard let self = self else { return }
+            guard !snapshot else {
+                self.EmailAndPasswordValidate(message: "이미 사용중인 이메일 입니다.")
+                return
+            }
+            
+            self.FBAuth.createUser(withEmail: email, password: password) { authResult, error in
+                guard authResult != nil, error == nil else {
+                    print("createUser ERROR!!! ")
+                    return
+                }
+                
+                UserDefaults.standard.setValue(email, forKey: "email")
+                UserDefaults.standard.setValue(password, forKey: "password")
+                
+                let user = User(email: email, name: name, username: userName, password: password)
+                DatabaseManager.shared.insertUser(with: user) { success in
+                    print(success)
+                }
+                self.navigationController?.dismiss(animated: true)
+            }
+        }
+        
+        
     }
 }

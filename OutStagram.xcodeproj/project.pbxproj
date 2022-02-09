@@ -3,10 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE365A7627B3DF1A0080C121 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DE365A7527B3DF1A0080C121 /* GoogleService-Info.plist */; };
+		DE365A7927B3DFD00080C121 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DE365A7827B3DFD00080C121 /* FirebaseStorage */; };
+		DE365A7B27B3DFD00080C121 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = DE365A7A27B3DFD00080C121 /* FirebaseAuth */; };
+		DE365A7D27B3DFD00080C121 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = DE365A7C27B3DFD00080C121 /* FirebaseFirestore */; };
+		DE365A7F27B3DFD00080C121 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DE365A7E27B3DFD00080C121 /* FirebaseDatabase */; };
+		DE365A8227B3EAC30080C121 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE365A8127B3EAC30080C121 /* DatabaseManager.swift */; };
 		DE42ED3B27A8112400CF36A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED3A27A8112400CF36A5 /* AppDelegate.swift */; };
 		DE42ED3D27A8112400CF36A5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED3C27A8112400CF36A5 /* SceneDelegate.swift */; };
 		DE42ED3F27A8112400CF36A5 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE42ED3E27A8112400CF36A5 /* FeedViewController.swift */; };
@@ -28,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE365A7527B3DF1A0080C121 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DE365A8127B3EAC30080C121 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		DE42ED3727A8112400CF36A5 /* OutStagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OutStagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE42ED3A27A8112400CF36A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE42ED3C27A8112400CF36A5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,13 +62,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE365A7F27B3DFD00080C121 /* FirebaseDatabase in Frameworks */,
 				DE42ED5027A8115B00CF36A5 /* SnapKit in Frameworks */,
+				DE365A7D27B3DFD00080C121 /* FirebaseFirestore in Frameworks */,
+				DE365A7B27B3DFD00080C121 /* FirebaseAuth in Frameworks */,
+				DE365A7927B3DFD00080C121 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE365A8027B3EA520080C121 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				DE365A8127B3EAC30080C121 /* DatabaseManager.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		DE42ED2E27A8112300CF36A5 = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +100,7 @@
 		DE42ED3927A8112400CF36A5 /* OutStagram */ = {
 			isa = PBXGroup;
 			children = (
+				DE365A8027B3EA520080C121 /* New Group */,
 				DE42ED5627A81D8200CF36A5 /* Extension */,
 				DE42ED5327A811FA00CF36A5 /* ViewController */,
 				DE42ED3A27A8112400CF36A5 /* AppDelegate.swift */,
@@ -87,6 +108,7 @@
 				DE42ED4327A8113000CF36A5 /* Assets.xcassets */,
 				DE42ED4527A8113000CF36A5 /* LaunchScreen.storyboard */,
 				DE42ED4827A8113000CF36A5 /* Info.plist */,
+				DE365A7527B3DF1A0080C121 /* GoogleService-Info.plist */,
 			);
 			path = OutStagram;
 			sourceTree = "<group>";
@@ -184,6 +206,10 @@
 			name = OutStagram;
 			packageProductDependencies = (
 				DE42ED4F27A8115B00CF36A5 /* SnapKit */,
+				DE365A7827B3DFD00080C121 /* FirebaseStorage */,
+				DE365A7A27B3DFD00080C121 /* FirebaseAuth */,
+				DE365A7C27B3DFD00080C121 /* FirebaseFirestore */,
+				DE365A7E27B3DFD00080C121 /* FirebaseDatabase */,
 			);
 			productName = OutStagram;
 			productReference = DE42ED3727A8112400CF36A5 /* OutStagram.app */;
@@ -204,7 +230,7 @@
 				};
 			};
 			buildConfigurationList = DE42ED3227A8112300CF36A5 /* Build configuration list for PBXProject "OutStagram" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -214,6 +240,7 @@
 			mainGroup = DE42ED2E27A8112300CF36A5;
 			packageReferences = (
 				DE42ED4E27A8115B00CF36A5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DE365A7727B3DFD00080C121 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = DE42ED3827A8112400CF36A5 /* Products */;
 			projectDirPath = "";
@@ -231,6 +258,7 @@
 			files = (
 				DE42ED4727A8113000CF36A5 /* LaunchScreen.storyboard in Resources */,
 				DE42ED4427A8113000CF36A5 /* Assets.xcassets in Resources */,
+				DE365A7627B3DF1A0080C121 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE365A8227B3EAC30080C121 /* DatabaseManager.swift in Sources */,
 				DE42ED3F27A8112400CF36A5 /* FeedViewController.swift in Sources */,
 				DE42ED6627A8315000CF36A5 /* UploadViewController.swift in Sources */,
 				DE42ED6427A8299F00CF36A5 /* ProfileCollectionVIewCell.swift in Sources */,
@@ -451,6 +480,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DE365A7727B3DFD00080C121 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.11.0;
+			};
+		};
 		DE42ED4E27A8115B00CF36A5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -462,6 +499,26 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DE365A7827B3DFD00080C121 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE365A7727B3DFD00080C121 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		DE365A7A27B3DFD00080C121 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE365A7727B3DFD00080C121 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		DE365A7C27B3DFD00080C121 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE365A7727B3DFD00080C121 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		DE365A7E27B3DFD00080C121 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE365A7727B3DFD00080C121 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
 		DE42ED4F27A8115B00CF36A5 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DE42ED4E27A8115B00CF36A5 /* XCRemoteSwiftPackageReference "SnapKit" */;

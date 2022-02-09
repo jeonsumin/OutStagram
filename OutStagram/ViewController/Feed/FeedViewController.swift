@@ -7,6 +7,7 @@
 
 import SnapKit
 import UIKit
+import FirebaseAuth
 
 class FeedViewController: UIViewController {
     
@@ -22,7 +23,10 @@ class FeedViewController: UIViewController {
         setupImagePickerView()
         
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        validateAuth()
+    }
 }
 
 
@@ -110,6 +114,16 @@ private extension FeedViewController {
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = .photoLibrary
         imagePickerController.delegate = self
+    }
+    
+    
+    func validateAuth(){
+        if FirebaseAuth.Auth.auth().currentUser == nil {
+            let loginVC = LoginViewController()
+            let navigationVC = UINavigationController(rootViewController: loginVC)
+            navigationVC.modalPresentationStyle = .fullScreen
+            self.present(navigationVC, animated: true)
+        }
     }
     
     @objc func didTappedUploadButton(){
