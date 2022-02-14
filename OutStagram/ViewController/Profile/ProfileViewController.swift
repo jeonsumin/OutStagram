@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
@@ -231,13 +232,32 @@ private extension ProfileViewController {
             
             
         },
-        UIAlertAction(title: "탈퇴 하기", style: .destructive) {[weak self] _ in
+        UIAlertAction(title: "탈퇴 하기", style: .destructive) {_ in
+            print("탈퇴 하기")
+//            guard let self = self else { return }
+//            let loginVC = LoginViewController()
+//            let navigationVC = UINavigationController(rootViewController: loginVC)
+//            navigationVC.modalPresentationStyle = .fullScreen
+//            navigationVC.modalTransitionStyle = .flipHorizontal
+//            self.present(navigationVC, animated: true, completion: nil)
+            
+        },
+        
+        UIAlertAction(title: "로그아웃", style: .destructive) {[weak self] _ in
             guard let self = self else { return }
-            let loginVC = LoginViewController()
-            let navigationVC = UINavigationController(rootViewController: loginVC)
-            navigationVC.modalPresentationStyle = .fullScreen
-            navigationVC.modalTransitionStyle = .flipHorizontal
-            self.present(navigationVC, animated: true, completion: nil)
+            do {
+                try FirebaseAuth.Auth.auth().signOut()
+                
+                let loginVC = LoginViewController()
+                let navigationVC = UINavigationController(rootViewController: loginVC)
+                navigationVC.modalPresentationStyle = .fullScreen
+                navigationVC.modalTransitionStyle = .flipHorizontal
+                self.present(navigationVC, animated: true, completion: nil)
+                
+            }catch {
+                NSLog("ERROR!!! Failed Logout")
+            }
+            
         },
         
         UIAlertAction(title: "닫기", style: .cancel)

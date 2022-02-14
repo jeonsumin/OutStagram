@@ -20,6 +20,16 @@ final class DatabaseManager {
     }
 }
 extension DatabaseManager {
+    public func getDataFor(path: String, completion: @escaping (Result<Any,Error>) -> Void ){
+        database.child("\(path)").observeSingleEvent(of: .value) { snapshop in
+            guard let value = snapshop.value else {
+                completion(.failure(DatabaseError.failedToFecth))
+                return
+            }
+            completion(.success(value))
+        }
+    }
+    
     public func selectUser(with email: String, completion: @escaping((Bool) -> Void )) {
         let email = DatabaseManager.safeEmail(email: email)
         
@@ -46,6 +56,18 @@ extension DatabaseManager {
             completion(true)
         }
     }
+    
+    public enum DatabaseError : Error {
+        case failedToFecth
+        
+        public var localizedDescription: String{
+            switch self {
+            case .failedToFecth:
+                return "This means blah failed"
+            }
+        }
+    }
+    
 }
 
 

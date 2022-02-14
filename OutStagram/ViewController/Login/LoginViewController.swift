@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
@@ -150,8 +151,45 @@ private extension LoginViewController {
         }
     }
     @objc func loginButtonTapped(){
-        print("loginButton Tapped ")
-        self.dismiss(animated: true, completion: nil)
+        guard let email = idTextField.text,
+              let password = pwTextField.text,
+              !email.isEmpty,
+              !password.isEmpty else { return }
+        
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
+            guard let result = result,
+                  error == nil,
+                  let self = self else {
+                      print("Failed Log In user with Email \(email)")
+                      return
+                  }
+            let user = result.user
+            
+            let safeEmail = DatabaseManager.safeEmail(email: email)
+            
+            //            DatabaseManager.shared.getDataFor(path: safeEmail) { result in
+//                switch result {
+//                case .success(let data):
+//                    guard let userData = data as? [String:Any],
+//                          let name = userData["name"] as? String else {
+//                              return
+//                          }
+//                    UserDefaults.standard.set(name, forKey: "name")
+//                case .failure(<#T##Error#>):
+//
+//                }
+//            }
+            
+            self.navigationController?.dismiss(animated: true, completion: nil)
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(email, forKey: "email")
+            userDefaults.set(password, forKey: "password")
+            
+            let email = userDefaults.value(forKey: "email")
+            let password = userDefaults.value(forKey: "password")
+            print("loginUser Email: \(email)")
+
+        }
     }
     
     @objc func registerButtonTapped(){
