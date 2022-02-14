@@ -25,6 +25,9 @@
 		DE54008F27BA712D00557B58 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = DE54008E27BA712D00557B58 /* FirebaseDatabase */; };
 		DE54009127BA712D00557B58 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DE54009027BA712D00557B58 /* FirebaseStorage */; };
 		DE54009427BA718C00557B58 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DE54009327BA718C00557B58 /* SnapKit */; };
+		DE54009627BA8AAA00557B58 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE54009527BA8AAA00557B58 /* StorageManager.swift */; };
+		DE54009C27BA9F4F00557B58 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = DE54009B27BA9F4F00557B58 /* JGProgressHUD */; };
+		DE54009F27BA9FA400557B58 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = DE54009E27BA9FA400557B58 /* SDWebImage */; };
 		DE9391A227B296C400BE5ED7 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9391A127B296C400BE5ED7 /* EditProfileViewController.swift */; };
 		DE9391A527B2A29800BE5ED7 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9391A427B2A29700BE5ED7 /* SeparatorView.swift */; };
 		DEF38E4027B146F2004FBDF5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF38E3F27B146F2004FBDF5 /* LoginViewController.swift */; };
@@ -49,6 +52,7 @@
 		DE42ED6027A8241A00CF36A5 /* ProfileDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDataView.swift; sourceTree = "<group>"; };
 		DE42ED6327A8299F00CF36A5 /* ProfileCollectionVIewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionVIewCell.swift; sourceTree = "<group>"; };
 		DE42ED6527A8315000CF36A5 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		DE54009527BA8AAA00557B58 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		DE9391A127B296C400BE5ED7 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		DE9391A427B2A29700BE5ED7 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		DEF38E3F27B146F2004FBDF5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -61,22 +65,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE54009F27BA9FA400557B58 /* SDWebImage in Frameworks */,
 				DE54008F27BA712D00557B58 /* FirebaseDatabase in Frameworks */,
 				DE54009427BA718C00557B58 /* SnapKit in Frameworks */,
 				DE54008D27BA712D00557B58 /* FirebaseAuth in Frameworks */,
 				DE54009127BA712D00557B58 /* FirebaseStorage in Frameworks */,
+				DE54009C27BA9F4F00557B58 /* JGProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DE365A8027B3EA520080C121 /* New Group */ = {
+		DE365A8027B3EA520080C121 /* FireBase */ = {
 			isa = PBXGroup;
 			children = (
 				DE365A8127B3EAC30080C121 /* DatabaseManager.swift */,
+				DE54009527BA8AAA00557B58 /* StorageManager.swift */,
 			);
-			path = "New Group";
+			path = FireBase;
 			sourceTree = "<group>";
 		};
 		DE42ED2E27A8112300CF36A5 = {
@@ -98,7 +105,7 @@
 		DE42ED3927A8112400CF36A5 /* OutStagram */ = {
 			isa = PBXGroup;
 			children = (
-				DE365A8027B3EA520080C121 /* New Group */,
+				DE365A8027B3EA520080C121 /* FireBase */,
 				DE42ED5627A81D8200CF36A5 /* Extension */,
 				DE42ED5327A811FA00CF36A5 /* ViewController */,
 				DE42ED3A27A8112400CF36A5 /* AppDelegate.swift */,
@@ -207,6 +214,8 @@
 				DE54008E27BA712D00557B58 /* FirebaseDatabase */,
 				DE54009027BA712D00557B58 /* FirebaseStorage */,
 				DE54009327BA718C00557B58 /* SnapKit */,
+				DE54009B27BA9F4F00557B58 /* JGProgressHUD */,
+				DE54009E27BA9FA400557B58 /* SDWebImage */,
 			);
 			productName = OutStagram;
 			productReference = DE42ED3727A8112400CF36A5 /* OutStagram.app */;
@@ -238,6 +247,8 @@
 			packageReferences = (
 				DE54008B27BA712D00557B58 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DE54009227BA718B00557B58 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DE54009A27BA9F4F00557B58 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				DE54009D27BA9FA400557B58 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = DE42ED3827A8112400CF36A5 /* Products */;
 			projectDirPath = "";
@@ -276,6 +287,7 @@
 				DE9391A227B296C400BE5ED7 /* EditProfileViewController.swift in Sources */,
 				DE42ED5F27A81ED500CF36A5 /* ProfileViewController.swift in Sources */,
 				DE42ED3D27A8112400CF36A5 /* SceneDelegate.swift in Sources */,
+				DE54009627BA8AAA00557B58 /* StorageManager.swift in Sources */,
 				DE42ED6127A8241A00CF36A5 /* ProfileDataView.swift in Sources */,
 				DE42ED5527A816B500CF36A5 /* FeedTableViewCell.swift in Sources */,
 				DEF38E4427B1532D004FBDF5 /* RegisterViewController.swift in Sources */,
@@ -493,6 +505,22 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		DE54009A27BA9F4F00557B58 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		DE54009D27BA9FA400557B58 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -515,6 +543,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DE54009227BA718B00557B58 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		DE54009B27BA9F4F00557B58 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE54009A27BA9F4F00557B58 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
+		DE54009E27BA9FA400557B58 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DE54009D27BA9FA400557B58 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

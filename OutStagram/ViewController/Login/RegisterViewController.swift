@@ -207,7 +207,10 @@ private extension RegisterViewController {
                 
                 UserDefaults.standard.setValue(email, forKey: "email")
                 UserDefaults.standard.setValue(password, forKey: "password")
+                UserDefaults.standard.setValue(name, forKey: "name")
+                UserDefaults.standard.setValue(userName, forKey: "userName")
                 
+//                let user = User(email: email, name: name, username: userName, password: password,description: "")
                 let user = User(email: email, name: name, username: userName, password: password)
                 DatabaseManager.shared.insertUser(with: user) { success in
                     print(success)

@@ -7,13 +7,18 @@
 
 import UIKit
 import FirebaseAuth
+import SDWebImage
 
 class ProfileViewController: UIViewController {
     
     //MARK: - Properties
     var isYn = true
-    private lazy var profileImageView : UIImageView = {
+    let userDefault = UserDefaults.standard
+    
+    lazy var profileImageView : UIImageView = {
         let img = UIImageView()
+        img.clipsToBounds = true
+        img.contentMode = .scaleAspectFill
         img.layer.cornerRadius = 40
         img.layer.borderWidth = 1
         img.layer.borderColor = UIColor.quaternaryLabel.cgColor
@@ -23,14 +28,12 @@ class ProfileViewController: UIViewController {
     
     private lazy var nameLabel: UILabel = {
         let lb = UILabel()
-        lb.text = "전수민"
         lb.font = .systemFont(ofSize: 14, weight: .semibold)
         return lb
     }()
     
     private lazy var descriptionLabel: UILabel = {
         let lb = UILabel()
-        lb.text = "안녕하세요."
         lb.font = .systemFont(ofSize: 14, weight: .medium)
         lb.numberOfLines = 0
         return lb
@@ -69,6 +72,7 @@ class ProfileViewController: UIViewController {
         btn.layer.cornerRadius = 3
         btn.layer.borderWidth = 0.5
         btn.layer.borderColor = UIColor.tertiaryLabel.cgColor
+        btn.addTarget(self, action: #selector(didTappedEditProfileButton), for: .touchUpInside)
         
         return btn
     }()
@@ -128,8 +132,10 @@ extension ProfileViewController: UICollectionViewDelegateFlowLayout {
 private extension ProfileViewController {
     //MARK: - 네비게이션 아이템 세팅
     func setupNavigationItems(){
+        guard let username = userDefault.value(forKey: "userName") as? String else { return }
+        
         if isYn {
-            navigationItem.title = "전수민"
+            navigationItem.title = "\(username)"
             let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
                                                  style: .plain,
                                                  target: self,
@@ -138,7 +144,7 @@ private extension ProfileViewController {
         } else {
             navigationItem.title = "등록"
             
-
+            
             
             let rightBarButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis"),
                                                  style: .plain,
@@ -150,6 +156,29 @@ private extension ProfileViewController {
     
     //MARK: - UI 세팅
     func setupUI(){
+        guard let username = userDefault.value(forKey: "userName") as? String,
+              var email = userDefault.value(forKey: "email") as? String,
+              let info = userDefault.value(forKey: "description") as? String
+        else { return }
+        
+        
+        email = email.replacingOccurrences(of: "@", with: "_")
+        email = email.replacingOccurrences(of: ".", with: "_")
+        let path = "image/\(email)_profile_image.png"
+        print("iamge Path::: \(path)")
+        StorageManager.shared.downloadURL(for: path) {[weak self] res in
+            guard let self = self else { return }
+            switch res {
+            case .success(let url):
+//                self.profileImageView.sd_setImage(with: url,op)
+                self.profileImageView.sd_setImage(with: url, placeholderImage: nil, options: .refreshCached)
+            case .failure(let error):
+                print("Image 가져오기 실패! \(error)")
+            }
+        }
+        nameLabel.text = username
+        descriptionLabel.text = "\(info)"
+        
         let buttonStackView = UIStackView(arrangedSubviews: [followButton,messageButton])
         buttonStackView.spacing = 4
         buttonStackView.distribution = .fillEqually
@@ -215,52 +244,66 @@ private extension ProfileViewController {
         collectionView.snp.makeConstraints{
             $0.leading.trailing.bottom.equalToSuperview()
             $0.top.equalTo(buttonStackView.snp.bottom).offset(16)
-            
         }
+        
+        
+        
     }
     //MARK: - Button Event
+    
+    @objc func didTappedEditProfileButton(){
+        
+        guard let username = userDefault.value(forKey: "userName") as? String ,
+              let email = userDefault.value(forKey: "email") as? String ,
+              let name = userDefault.value(forKey: "name") as? String
+        else { return }
+        
+        let info = userDefault.value(forKey: "description") as? String
+        let editProfileVC = EditProfileViewController()
+        let navigationVC = UINavigationController(rootViewController: editProfileVC)
+        let user = User(email: email, name: name, username: username,description: info)
+        print("user??? ::: \(user)")
+        editProfileVC.user = user
+        navigationVC.modalPresentationStyle = .overFullScreen
+        self.present(navigationVC, animated: true)
+    }
+    
     @objc func didTappedRightBarButtonItem(){
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         [
-        UIAlertAction(title: "설정", style: .default) { [weak self] _ in
-            guard let self = self else { return }
-            let editProfileVC = EditProfileViewController()
-            let navigationVC = UINavigationController(rootViewController: editProfileVC)
-//            navigationVC.modalTransitionStyle = .partialCurl
-            navigationVC.modalPresentationStyle = .overFullScreen
-            self.present(navigationVC, animated: true)
-            
-            
-        },
-        UIAlertAction(title: "탈퇴 하기", style: .destructive) {_ in
-            print("탈퇴 하기")
-//            guard let self = self else { return }
-//            let loginVC = LoginViewController()
-//            let navigationVC = UINavigationController(rootViewController: loginVC)
-//            navigationVC.modalPresentationStyle = .fullScreen
-//            navigationVC.modalTransitionStyle = .flipHorizontal
-//            self.present(navigationVC, animated: true, completion: nil)
-            
-        },
-        
-        UIAlertAction(title: "로그아웃", style: .destructive) {[weak self] _ in
-            guard let self = self else { return }
-            do {
-                try FirebaseAuth.Auth.auth().signOut()
+            UIAlertAction(title: "설정", style: .default) {_ in
+                NSLog("설정")
                 
-                let loginVC = LoginViewController()
-                let navigationVC = UINavigationController(rootViewController: loginVC)
-                navigationVC.modalPresentationStyle = .fullScreen
-                navigationVC.modalTransitionStyle = .flipHorizontal
-                self.present(navigationVC, animated: true, completion: nil)
+            },
+            UIAlertAction(title: "탈퇴 하기", style: .destructive) {_ in
+                NSLog("탈퇴 하기")
+                //            guard let self = self else { return }
+                //            let loginVC = LoginViewController()
+                //            let navigationVC = UINavigationController(rootViewController: loginVC)
+                //            navigationVC.modalPresentationStyle = .fullScreen
+                //            navigationVC.modalTransitionStyle = .flipHorizontal
+                //            self.present(navigationVC, animated: true, completion: nil)
                 
-            }catch {
-                NSLog("ERROR!!! Failed Logout")
-            }
+            },
             
-        },
-        
-        UIAlertAction(title: "닫기", style: .cancel)
+            UIAlertAction(title: "로그아웃", style: .destructive) {[weak self] _ in
+                guard let self = self else { return }
+                do {
+                    try FirebaseAuth.Auth.auth().signOut()
+                    
+                    let loginVC = LoginViewController()
+                    let navigationVC = UINavigationController(rootViewController: loginVC)
+                    navigationVC.modalPresentationStyle = .fullScreen
+                    navigationVC.modalTransitionStyle = .flipHorizontal
+                    self.present(navigationVC, animated: true, completion: nil)
+                    
+                }catch {
+                    NSLog("ERROR!!! Failed Logout")
+                }
+                
+            },
+            
+            UIAlertAction(title: "닫기", style: .cancel)
         ].forEach {
             alert.addAction($0)
         }

@@ -45,7 +45,8 @@ extension DatabaseManager {
     public func insertUser(with user: User, completion: @escaping (Bool) -> Void) {
         let setValue = [
             "name": user.name,
-            "userName" :user.username
+            "userName" :user.username,
+            "description":user.description,
         ]
         database.child(user.safeEmail).setValue(setValue) {error, _ in
             guard error == nil else {
@@ -72,10 +73,10 @@ extension DatabaseManager {
 
 
 struct User{
-    let email: String
-    let name: String
-    let username: String
-    let password : String
+    var email: String
+    var name: String
+    var username: String
+    var password : String?
     var safeEmail: String {
         var safeEmail = email.replacingOccurrences(of: "@", with: "_")
         safeEmail = safeEmail.replacingOccurrences(of: ".", with: "_")
@@ -84,4 +85,5 @@ struct User{
     var profileImage: String {
         return "\(safeEmail)_profile_image.png"
     }
+    var description: String?
 }

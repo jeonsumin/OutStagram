@@ -7,16 +7,25 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
+import JGProgressHUD
+
 
 class EditProfileViewController: UIViewController {
     
     //MARK: - Properties
+    var user = User(email: "", name: "", username: "", description: nil)
+    let progress = JGProgressHUD(style: .dark)
+    
+    let imagePickerController = UIImagePickerController()
+    let userDefault = UserDefaults.standard
+    
     /// 프로필사진
     private lazy var profileImageView: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 50
         image.clipsToBounds = true
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.backgroundColor = .systemGray
         
         return image
@@ -99,6 +108,34 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
         setupNavigationBar()
         setupUI()
+        imagePickerController.delegate = self
+    }
+}
+
+extension EditProfileViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
+    func presentCamera(){
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = .camera
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func presentPhotoLibrary(){
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            profileImageView.image = editedImage
+        }else if let originImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            profileImageView.image = originImage
+        }
+        
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true ,completion: nil)
     }
 }
 
@@ -175,6 +212,19 @@ private extension EditProfileViewController {
             $0.top.equalTo(separatorView.snp.bottom).offset(20)
             $0.leading.equalTo(labelStackView.snp.trailing).offset(20)
         }
+        nameTextField.text = user.name
+        userNameTextField.text = user.username
+        infoTextField.text = user.description
+        
+        let path = "image/\(user.safeEmail)_profile_image.png"
+        StorageManager.shared.downloadURL(for: path) {[weak self] res in
+            switch res {
+            case .success(let url):
+                self?.profileImageView.sd_setImage(with: url)
+            case .failure(let error):
+                print("Image 가져오기 실패! \(error)")
+            }
+        }
     }
     
     //MARK: - Button Event
@@ -183,7 +233,42 @@ private extension EditProfileViewController {
     }
     
     @objc func editProfileButtonTapped(){
-        self.dismiss(animated: true)
+        guard let name = nameTextField.text,
+              let username = userNameTextField.text,
+              let info = infoTextField.text,
+              let image = profileImageView.image,
+              let data = image.pngData()
+        else { return }
+        progress.show(in: view)
+        let fileName = user.profileImage
+        user.name = name
+        user.username = username
+        user.description = info
+        print("data::: \(data) ")
+        DatabaseManager.shared.insertUser(with: user) { result in
+            if result {
+                StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) {[weak self] res in
+                    guard let self = self else { return }
+                    switch res {
+                    case .success(let downloadUrl):
+                        self.progress.dismiss(animated: true)
+                        
+                        UserDefaults.standard.set(downloadUrl, forKey: "profilePicture")
+                        let vc = ProfileViewController()
+                        let url = URL(string: downloadUrl)
+                        vc.profileImageView.sd_setImage(with: url   )
+                        self.navigationController?.dismiss(animated: true, completion: nil)
+                        
+                    case .failure(let error) :
+                        print("StorageManager ERROR!!! \(error)")
+                    }
+                }
+            }
+            
+        }
+        UserDefaults.standard.set(info, forKey: "description")
+        
+        
     }
     
     @objc func editProfileImageButtonTapped() {
@@ -193,10 +278,10 @@ private extension EditProfileViewController {
             print("deletePicturesButton")
         },
         UIAlertAction(title: "사진 찍기", style: .default) { _ in
-            print("takePicturesButton")
+            self.presentCamera()
         },
         UIAlertAction(title: "라이브러리에서 선택", style: .default) { _ in
-            print("libraryButton")
+            self.presentPhotoLibrary()
         },
         UIAlertAction(title: "취소", style: .cancel)
         ].forEach{

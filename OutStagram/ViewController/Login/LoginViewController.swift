@@ -157,16 +157,13 @@ private extension LoginViewController {
               !password.isEmpty else { return }
         
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
-            guard let result = result,
-                  error == nil,
-                  let self = self else {
-                      print("Failed Log In user with Email \(email)")
-                      return
-                  }
-            let user = result.user
-            
-            let safeEmail = DatabaseManager.safeEmail(email: email)
-            
+            guard let self = self else { return }
+//            guard let result = result,
+//                  error == nil,
+//                  let self = self else {
+//                      print("Failed Log In user with Email \(email)")
+//                      return
+//                  }
             //            DatabaseManager.shared.getDataFor(path: safeEmail) { result in
 //                switch result {
 //                case .success(let data):
@@ -186,8 +183,7 @@ private extension LoginViewController {
             userDefaults.set(password, forKey: "password")
             
             let email = userDefaults.value(forKey: "email")
-            let password = userDefaults.value(forKey: "password")
-            print("loginUser Email: \(email)")
+            print("loginUser Email: \(String(describing: email))")
 
         }
     }
